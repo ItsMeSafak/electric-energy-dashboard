@@ -1,7 +1,7 @@
 # Electric energy dashboard
 Hello there! Welcome to the dashboard made by team 1!
 
-*We are live not yet live!*
+*We not yet live!*
 
 ---
 ## Setup and installations
