@@ -1,16 +1,17 @@
 import requests as rq
 import streamlit as st
 import pandas as pd
+import utils.constants as constants
 
 @st.cache()
 def fetchRDWData():
-    response = rq.get("https://opendata.rdw.nl/resource/w4rt-e856.json", 
+    response = rq.get(constants.RDW_API_URL, 
     headers={"X-App-Token": st.secrets['RDW_API_KEY']})
     return pd.read_json(response.json())
 
 @st.cache()
 def fetchOCMData():
-    response = rq.get("https://api.openchargemap.io/v3/poi", 
+    response = rq.get(constants.OCM_API_URL, 
     headers={"X-API-Key": st.secrets['OCM_API_KEY']})
     return pd.read_json(response.json())
 
