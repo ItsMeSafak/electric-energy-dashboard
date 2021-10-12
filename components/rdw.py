@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 from utils.helpers import fetchLaadPaalData, show_with_options
 import plotly.express as px
-import partials.base as gSlider
+import components.base as gSlider
 
 merk_list = ["All", "Volkswagen", "Opel", "Peugeot", "Renault", "Ford", "Toyota", "Mercedes-Benz", "Citroen", "Tesla"]
 MERK_list = [(each_string.upper()+".csv") for each_string in merk_list]
