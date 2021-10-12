@@ -2,19 +2,24 @@ import streamlit as st
 from utils.helpers import fetchOCMData, show_with_options
 import folium
 from streamlit_folium import folium_static
+import numpy as np
 
 df = fetchOCMData(st.secrets['OCM_API_KEY'])
 filters = fetchOCMData(st.secrets['OCM_API_KEY'], True)
-selectedProvince = "Gelderland"
+selectedProvince = ""
 chargingTypes = []
 
 def map():
     global df
     colors = {True : 'green', False : 'red'}
-    central = df.loc[df['AddressInfo.StateOrProvince'] == selectedProvince].iloc[0]
+    if (selectedProvince == 'Nederland (centraal)'):
+        map = folium.Map(location=[52.358993, 4.903005], zoom_start=7, control_scale=True)
+    else:
+        central = df.loc[df['AddressInfo.StateOrProvince'] == selectedProvince].iloc[0]
+        lat, lon = (central['AddressInfo.Latitude'], central['AddressInfo.Longitude'])
+        map = folium.Map(location=[lat, lon], zoom_start=10, control_scale=True)
     new_df = df[[set(x).issubset(set(chargingTypes)) for x in df['Connections']]]
-    lat, lon = (central['AddressInfo.Latitude'], central['AddressInfo.Longitude'])
-    map = folium.Map(location=[lat, lon], zoom_start=10, control_scale=True)
+    
     new_df.apply(lambda row: folium.Marker(location=[row["AddressInfo.Latitude"], row["AddressInfo.Longitude"]], 
                                             icon=folium.Icon(color=colors[row['IsRecentlyVerified']]), popup=row['IsRecentlyVerified'], fill_opacity=1)
                                             .add_to(map), axis=1)
@@ -26,9 +31,10 @@ def main():
     with col3:
         global selectedProvince
         global chargingTypes
+        listOfProvinces = np.insert(df['AddressInfo.StateOrProvince'].dropna().unique(), 0, 'Nederland (centraal)')
         selectedProvince = st.selectbox(
             "Provincie",
-            df['AddressInfo.StateOrProvince'].dropna().unique())
+            listOfProvinces)
         chargingTypes = st.multiselect(
             "Oplaad type",
             filters, default=filters[1])
