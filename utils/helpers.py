@@ -2,7 +2,6 @@ import requests as rq
 import streamlit as st
 import pandas as pd
 import utils.constants as constants
-import partials.base as base
 import inspect
 
 @st.cache
@@ -45,6 +44,7 @@ def fetchLaadPaalData(type=None):
     return df[(df['Started']) < df['Ended'] & (df['ConnectedTime'] > df['ChargeTime'])]
 
 def show_with_options(func, text=''):
+    import components.base as base
     if (text != ''):
         st.markdown('*' + text + '*')
     if base.showPlots: func()

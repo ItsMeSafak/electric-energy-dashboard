@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import date
-import partials.nav as nav
+import components.nav as nav
+
 
 def sidebar():
     # Global variables to check on plots
@@ -8,13 +9,6 @@ def sidebar():
     global showCode
     global start_h
     global end_h
-
-    # Initial page config
-    st.set_page_config(
-        page_title='Electric energy dashboard',
-        layout='wide',
-        initial_sidebar_state="expanded"
-    )
 
     st.sidebar.header('Dashboard setings')
     st.sidebar.write('Display settings:')

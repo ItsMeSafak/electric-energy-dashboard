@@ -1,7 +1,7 @@
 # Electric energy dashboard
 Hello there! Welcome to the dashboard made by team 1!
 
-*We are live: https://share.streamlit.io/itsmesafak/electric-energy-dashboard/main.py*
+*We are live: https://share.streamlit.io/itsmesafak/electric-energy-dashboard/main.py
 
 ---
 ## Setup and installations
