@@ -2,7 +2,7 @@ import requests as rq
 import streamlit as st
 import pandas as pd
 import utils.constants as constants
-import partials.base as base
+import components.base as base
 import inspect
 
 @st.cache

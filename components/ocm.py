@@ -12,9 +12,8 @@ def map():
     global df
     colors = {True : 'green', False : 'red'}
     central = df.loc[df['AddressInfo.StateOrProvince'] == selectedProvince].iloc[0]
-    if (len(chargingTypes) > 0):
-        print(any(elem in chargingTypes for elem in df['Connections']))
-        df = df[any(elem in chargingTypes for elem in df['Connections'])]
+    # if (len(chargingTypes) > 0):
+    #     df = df[[[a in chargingTypes for a in b ] for b in df['Connections']]]
     lat, lon = (central['AddressInfo.Latitude'], central['AddressInfo.Longitude'])
     map = folium.Map(location=[lat, lon], zoom_start=10, control_scale=True)
     df.apply(lambda row: folium.Marker(location=[row["AddressInfo.Latitude"], row["AddressInfo.Longitude"]], 
