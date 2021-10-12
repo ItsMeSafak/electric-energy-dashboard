@@ -5,3 +5,4 @@ streamlit
 requests
 folium
 streamlit-folium
+scipy

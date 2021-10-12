@@ -4,10 +4,10 @@ st.set_page_config(
         layout='wide',
         initial_sidebar_state="expanded"
     )
-import components.base as base
 
 # Mainsss
 if __name__ == "__main__":
+    import components.base as base
     base.main()
 
 
