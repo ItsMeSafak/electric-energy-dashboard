@@ -4,10 +4,8 @@ import plotly.express as px
 import streamlit as st
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
-
-import seaborn as sns
 from statsmodels.formula.api import ols
-import matplotlib.pyplot as plt
+
 
 main_df = fetchLaadPaalData("CTime")
 
