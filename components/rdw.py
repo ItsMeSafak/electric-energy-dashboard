@@ -17,11 +17,11 @@ for i, file in enumerate(MERK_list):
 fuel_list = ["Electriciteit", "Benzine", "Diesel", "LPG", "CNG", "LNG", "Alcohol","Waterstof"]
 fuel_file_list = [(each_string +".csv") for each_string in fuel_list]
 scatter_dict = dict.fromkeys(fuel_list)
-st.write(scatter_dict)
+
 for i, file in enumerate(fuel_file_list):
     with open("data/csv/scatter/"+file) as csv:
         scatter_dict[fuel_list[i]] = pd.read_csv(csv, index_col="Datum tenaamstelling", parse_dates=["Datum tenaamstelling"])
-st.write(scatter_dict)
+
 
 
 def line():
@@ -39,7 +39,7 @@ def line():
               color_discrete_map = fuel_color_map)
 
     fig.update_layout(yaxis_title="Aantal Autos cumulatief", xaxis_title = "Datum")
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 def scatter():
     st.write("Scatter")
@@ -61,26 +61,29 @@ def scatter():
         xanchor="left",
         x=0.01
     ))
-    st.plotly_chart(fig)
-
-
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def main():
     st.header("RDW Data")
     col1, _, col3 = st.columns([6, 1, 3])
+    col4, _, col6 = st.columns([6, 1, 3])
+
     with col3:
         global selectedMerk
 
         selectedMerk = st.selectbox(
             "Merk", merk_list)
 
+    with col1:
+        show_with_options(line, "Cool line, very pog")
+
+    with col6:
         global selectedFuel
 
         selectedFuel = st.selectbox(
             "Brandstof", fuel_list)
 
-
-    with col1:
-        show_with_options(line, "Cool line, very pog")
+    with col4:
         show_with_options(scatter, "Cool scatter, very pog")
+
