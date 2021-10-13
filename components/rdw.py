@@ -25,7 +25,6 @@ for i, file in enumerate(fuel_file_list):
 
 
 def line():
-    st.write("Line")
     df_merk = line_dict[selectedMerk]
     start = gSlider.start_h
     end = gSlider.end_h
@@ -35,14 +34,13 @@ def line():
 
     fig = px.line(df_merk[start:end], y="Kenteken",
               color="Brandstof omschrijving",
-              title="Cumulatief nieuwe registraties per brandstoftype",
               color_discrete_map = fuel_color_map)
 
-    fig.update_layout(yaxis_title="Aantal Autos cumulatief", xaxis_title = "Datum")
+    fig.update_layout(yaxis_title="Aantal Autos cumulatief", xaxis_title = "Datum",
+              title={'text': 'Cumulatief nieuwe registraties per brandstoftype', 'x': 0.5})
     st.plotly_chart(fig, use_container_width=True)
 
 def scatter():
-    st.write("Scatter")
     df_fuel = scatter_dict[selectedFuel]
     start = gSlider.start_h
     end = gSlider.end_h
@@ -50,17 +48,16 @@ def scatter():
     fuel_color_map = {'Benzine' : "brown", 'Diesel': "black", 'LPG' : "orange", 'Elektriciteit': "blue", 'CNG': "yellow", 'Alcohol' : "red",
            'Waterstof' : "aqua", 'LNG' : "green"}
 
-
     fig = px.scatter(df_fuel[start:end], y="Brandstof omschrijving", trendline="rolling",
-                     trendline_options=dict(window=50),
-                     trendline_color_override="red", labels = {"Brandstof omschrijving": selectedFuel })  # color_discrete_map = species_color_map)
+                     trendline_options=dict(window=30),
+                     trendline_color_override="red", labels = {"Brandstof omschrijving": selectedFuel })
 
-    fig.update_layout(legend=dict(
-        yanchor="top",
-        y=0.99,
-        xanchor="left",
-        x=0.01
-    ))
+    fig.update_layout(
+        title={'text': 'Nieuwe registraties per dag per brandstof: '+ selectedFuel, 'x': 0.5},
+        xaxis_title='Datum',
+        yaxis_title='Aantal nieuwe registraties',
+        coloraxis_colorbar=dict(title="Totaal verbruikte energie <br> in Wh"))
+
     st.plotly_chart(fig, use_container_width=True)
 
 
@@ -86,4 +83,5 @@ def main():
 
     with col4:
         show_with_options(scatter, "Cool scatter, very pog")
+
 
