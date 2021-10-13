@@ -68,7 +68,7 @@ def main():
             "Merk", merk_list)
 
     with col1:
-        show_with_options(line, "In dit figuur zijn de cumulatieve nieuwe registraties per brandstoftype te zien. Met de slider is de periode te selecteren. Met de dropdown zijn de top 8 populairste automerken (RDW data) te selecteren. Ook is elektriciteit toegevoegd, vanwege de toenemende populariteit. Deze toenemende populariteit is dan ook te zien in het figuur. Verder is in het figuur te zien dat benzine de meest voorkomende brandstof is, gevolgd door diesel. Ook is opvallend dat er vanaf 2010 bij de meeste merken er een toename is te zien.")
+        show_with_options(line, "In dit figuur zijn de cumulatieve nieuwe registraties per brandstoftype te zien. Met de slider is de periode te selecteren. Met de dropdown zijn de top 8 populairste automerken (RDW data) te selecteren. Ook is Tesla toegevoegd, vanwege de toenemende populariteit. Deze toenemende populariteit is dan ook te zien in het figuur. Verder is in het figuur te zien dat benzine de meest voorkomende brandstof is, gevolgd door diesel. Ook is opvallend dat er vanaf 2010 bij de meeste merken er een toename is te zien.")
 
     with col6:
         global selectedFuel
