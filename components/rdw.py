@@ -1,8 +1,8 @@
+import components.base as gSlider
 import pandas as pd
 import streamlit as st
 from utils.helpers import fetchLaadPaalData, show_with_options
 import plotly.express as px
-import components.base as gSlider
 
 merk_list = ["All", "Volkswagen", "Opel", "Peugeot", "Renault", "Ford", "Toyota", "Mercedes-Benz", "Citroen", "Tesla"]
 MERK_list = [(each_string.upper()+".csv") for each_string in merk_list]
@@ -24,10 +24,9 @@ for i, file in enumerate(fuel_file_list):
 
 
 
-def line():
+def line():    
     df_merk = line_dict[selectedMerk]
-    start = gSlider.start_h
-    end = gSlider.end_h
+    start, end = gSlider.start_h, gSlider.end_h
 
     fuel_color_map = {'Benzine' : "brown", 'Diesel': "black", 'LPG' : "orange", 'Elektriciteit': "blue", 'CNG': "yellow", 'Alcohol' : "red",
            'Waterstof' : "aqua", 'LNG' : "green"}
@@ -42,11 +41,7 @@ def line():
 
 def scatter():
     df_fuel = scatter_dict[selectedFuel]
-    start = gSlider.start_h
-    end = gSlider.end_h
-
-    fuel_color_map = {'Benzine' : "brown", 'Diesel': "black", 'LPG' : "orange", 'Elektriciteit': "blue", 'CNG': "yellow", 'Alcohol' : "red",
-           'Waterstof' : "aqua", 'LNG' : "green"}
+    start, end = gSlider.start_h, gSlider.end_h
 
     fig = px.scatter(df_fuel[start:end], y="Brandstof omschrijving", trendline="rolling",
                      trendline_options=dict(window=30),
@@ -73,7 +68,7 @@ def main():
             "Merk", merk_list)
 
     with col1:
-        show_with_options(line, "Cool line, very pog")
+        show_with_options(line, "In dit figuur zijn de cumulatieve nieuwe registraties per brandstoftype te zien. Met de slider is de periode te selecteren. Met de dropdown zijn de top 8 populairste automerken (RDW data) te selecteren. Ook is elektriciteit toegevoegd, vanwege de toenemende populariteit. Deze toenemende populariteit is dan ook te zien in het figuur. Verder is in het figuur te zien dat benzine de meest voorkomende brandstof is, gevolgd door diesel. Ook is opvallend dat er vanaf 2010 bij de meeste merken er een toename is te zien.")
 
     with col6:
         global selectedFuel
@@ -82,6 +77,6 @@ def main():
             "Brandstof", fuel_list)
 
     with col4:
-        show_with_options(scatter, "Cool scatter, very pog")
+        show_with_options(scatter, "In dit figuur is een scatterplot te zien van het aantal nieuwe registraties per brandstoftype per dag. Met de dropdown is de brandstofsoort te selecteren. Ook bij dit figuur is de periode te selecteren door middel van de slider. Opvallend is dat vrijwel alle brandstofsoorten in frequentie toenemen naarmate de jaren toenemen. Ook is bij elektriciteit in de maand van december 2019 en 2020 een piek te zien. Een mogelijke verklaring kan het naderen van het einde van het fiscale jaar zijn.")
 
 
