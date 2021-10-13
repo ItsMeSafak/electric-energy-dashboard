@@ -187,3 +187,5 @@ def main():
     with st.expander("Boxplot", False):
         show_with_options(boxplot_totalenergy, "")
     show_with_options(regression, "In het volgende figuur is een scatterplot met daarin een lineaire regressie te zien. Op de y-as van de scatterplot is de totaal verbruikte energie per laadsessie te zien. Op de x-as  is de chargetime per sessie te zien. Door middel van een lineaire regressie is er op basis van de chargetime  voorspeld wat de de totaal verbruikte energie zal worden. De voorspellende data is af te lezen met behulp van de lijn die door het figuur loopt. De voorspelling is gemaakt op basis van de data van de meerderheid groep die valt tussen een gevraagd vermogen tussen 3000 W en 3800 W. Een mogelijke verklaring voor het afwijken van de voorspelling voor hoge charge time waardes kan te maken hebben met de oplaad curve van batterijen.")
+    st.markdown("***")
+
