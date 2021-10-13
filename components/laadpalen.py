@@ -3,6 +3,9 @@ from utils.helpers import fetchLaadPaalData, show_with_options
 import plotly.express as px
 import streamlit as st
 import plotly.figure_factory as ff
+import plotly.graph_objects as go
+from statsmodels.formula.api import ols
+
 
 main_df = fetchLaadPaalData("CTime")
 
@@ -124,6 +127,36 @@ def histogram_totalenergy_nout():
 
     st.plotly_chart(fig, use_container_width=True)
 
+
+def regression():
+    global main_df
+
+
+    df_reg = main_df[main_df["ChargeTime"].between(0,40)]
+    df_reg = df_reg[df_reg["MaxPower"].between(3000,3800)]
+
+    mdl_chargetime_vs_totalenergy = ols("TotalEnergy ~ ChargeTime", data=df_reg).fit()
+    explanatory_data = df_reg[['ChargeTime']]
+    mdl_chargetime_vs_totalenergy.predict(explanatory_data)
+    prediction_data = explanatory_data.assign(TotalEnergy=mdl_chargetime_vs_totalenergy.predict(explanatory_data))
+    fig = px.scatter(df_reg, y="TotalEnergy", x="ChargeTime",color = "TotalEnergy",
+                 title="REG")
+
+    fig.add_trace(
+        go.Scatter(
+            y=prediction_data["TotalEnergy"],
+            x=prediction_data["ChargeTime"], showlegend= False)
+    )
+    fig.update_traces(name='Voorspelling')
+    fig.update_layout(title={'text': 'Voorspelling voor "Totaal verbruikte energie" op basis van "Oplaadtijd" met Ols ', 'x': 0.5},
+                      xaxis_title='Oplaadtijd',
+                      yaxis_title='Totaal verbruikte energie in Wh',
+                    coloraxis_colorbar=dict(title="Totaal verbruikte energie <br> in Wh")
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
 def main():
     st.header("Laadpalen")
     col1, _, col3 = st.columns([6, 1, 3])
@@ -153,5 +186,5 @@ def main():
     show_with_options(histogram_totalenergy_nout, "Deze figuren geeft de totaal verbruikte energie per laadsessie weer. Deze boxplot laat zien dat de data wederom een grote spreiding bevat, met veel hoge uitschieters. Net als bij het vorige figuur van het maximaal gevraagde vermogen is er voor dit figuur een extra histogram toegevoegd om te kijken naar de data die binnen de histogram valt.  Een verklaring voor de grote spreiding is dat de totaal verbruikte energie sterk wordt beïnvloed door de maximaal gevraagde vermogen en door de charge time per sessie. Het gemiddelde van de totaal verbruikte energie per sessie is 10407 Wh. De mediaan is 7713 Wh.")
     with st.expander("Boxplot", False):
         show_with_options(boxplot_totalenergy, "")
-
+    show_with_options(regression, "Cool prediction, very pog")
 
