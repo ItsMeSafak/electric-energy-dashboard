@@ -41,5 +41,5 @@ def main():
             filters, default=filters)
         
     with col1:
-        show_with_options(map, "Cool map, very pog")
+        show_with_options(map, "Met de data van de OpenChargeMap is er een map van Nederland gemaakt van het aantal laadpunten. Met de dropdown kan een specifieke provincie geselecteerd worden en met de checkbox zijn één of meerdere oplaadtypes te selecteren. De kleur groen geeft de recent geverifieerde laadpunten weer en de kleur rood geeft de niet recent geverifieerde laadpunten aan. Opvallend is dat er met een limiet van 500 rows een klein percentage van de laadpunten geverifieerd zijn. Verder is opvallend dat het merk CHadeMO weinig laadpunten heeft.")
     
