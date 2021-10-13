@@ -1,12 +1,15 @@
 import components.laadpalen
 import components.ocm
 import components.rdw
+import components.landingpage
 import streamlit as st
 
+select = ""
 
 def main():
+    global select
     pages = {
-        "Alles": 0,
+        "Alles": components.landingpage,
         "Laadpalen": components.laadpalen,
         "Open charge map": components.ocm,
         "RDW Data": components.rdw
@@ -16,7 +19,4 @@ def main():
         "Pagina",
         pages.keys()
     )
-    if (pages[select] == 0):
-        [pages[p].main() for p in pages if pages[p] != 0]
-    else:
-        pages[select].main()
+    pages[select].main()

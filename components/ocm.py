@@ -13,11 +13,11 @@ def map():
     global df
     colors = {True : 'green', False : 'red'}
     if (selectedProvince == 'Nederland (centraal)'):
-        map = folium.Map(location=[52.358993, 4.903005], zoom_start=7, control_scale=True)
+        map = folium.Map(location=[52.358993, 4.903005], zoom_start=7, control_scale=True, width=850, height=500) 
     else:
         central = df.loc[df['AddressInfo.StateOrProvince'] == selectedProvince].iloc[0]
         lat, lon = (central['AddressInfo.Latitude'], central['AddressInfo.Longitude'])
-        map = folium.Map(location=[lat, lon], zoom_start=10, control_scale=True)
+        map = folium.Map(location=[lat, lon], zoom_start=10, control_scale=True, width=850, height=500)
     new_df = df[[set(x).issubset(set(chargingTypes)) for x in df['Connections']]]
     
     new_df.apply(lambda row: folium.Marker(location=[row["AddressInfo.Latitude"], row["AddressInfo.Longitude"]], 
@@ -31,13 +31,14 @@ def main():
     with col3:
         global selectedProvince
         global chargingTypes
-        listOfProvinces = np.insert(df['AddressInfo.StateOrProvince'].dropna().unique(), 0, 'Nederland (centraal)')
+        listOfProvinces = np.insert(df.sort_values(by=['AddressInfo.StateOrProvince'])['AddressInfo.StateOrProvince']
+            .dropna().unique(), 0, 'Nederland (centraal)')
         selectedProvince = st.selectbox(
             "Provincie",
             listOfProvinces)
         chargingTypes = st.multiselect(
             "Oplaad type",
-            filters, default=filters[1])
+            filters, default=filters)
         
     with col1:
         show_with_options(map, "Cool map, very pog")

@@ -16,7 +16,7 @@ def fetchRDWData(isBrandstof=False):
 @st.cache
 def fetchOCMData(token, isFilters=False):
     response = rq.get(constants.OCM_API_URL, 
-    headers={"X-API-Key": token}).json()
+    headers={"X-API-Key": token}, params={"maxresults": 500}).json()
     df = pd.json_normalize(response)
     fitlers = pd.json_normalize(response, record_path=["Connections"])
     listOfCols = ['IsRecentlyVerified', 'UsageType.Title', 'AddressInfo.Latitude', 'AddressInfo.Longitude', 'AddressInfo.StateOrProvince', 

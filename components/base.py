@@ -17,17 +17,19 @@ def sidebar():
     showPlots = st.sidebar.checkbox('Show plots', True)
     showCode = st.sidebar.checkbox('Show code', False)
 
-    # Date selector
     start_h, end_h = (date(1970, 2, 1), date.today())
-    st.sidebar.header("Selecteer een start en eind datum:")
-    start_h = st.sidebar.date_input('Start datum', start_h, key = "startd")
-    end_h = st.sidebar.date_input('Eind datum', end_h, key = "endd")
-
-    # Slider for date
-    start_h, end_h = st.sidebar.slider("Selecteer een periode", start_h, end_h,
-                                       (start_h, end_h), key="Globalslider")
 
     nav.main()
+
+    if (nav.select== "RDW Data" or nav.select == "Alles"):
+        # Date selector
+        st.sidebar.header("Selecteer een start en eind datum:")
+        start_h = st.sidebar.date_input('Start datum', start_h, key = "startd")
+        end_h = st.sidebar.date_input('Eind datum', end_h, key = "endd")
+
+        # Slider for date
+        start_h, end_h = st.sidebar.slider("Selecteer een periode", start_h, end_h,
+                                        (start_h, end_h), key="Globalslider")
 
     st.sidebar.markdown('[README.md](https://github.com/ItsMeSafak/electric-energy-dashboard/blob/master/README.md)')
 
