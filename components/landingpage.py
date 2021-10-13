@@ -4,7 +4,7 @@ import components.ocm
 import components.rdw
 
 def main():
-    st.title("Electrisch Vervoer dashboard")
+    st.title("Elektrisch Vervoer dashboard")
     col1, col2 = st.columns([2, 1])
     with col2:
         st.image("assets/auto.png")
