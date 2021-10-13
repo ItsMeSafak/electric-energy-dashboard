@@ -14,7 +14,7 @@ for i, file in enumerate(MERK_list):
 
 
 
-fuel_list = ["Electriciteit", "Benzine", "Diesel", "LPG", "CNG", "LNG", "Alcohol","Waterstof"]
+fuel_list = ["Elektriciteit", "Benzine", "Diesel", "LPG", "CNG", "LNG", "Alcohol","Waterstof"]
 fuel_file_list = [(each_string +".csv") for each_string in fuel_list]
 scatter_dict = dict.fromkeys(fuel_list)
 
@@ -32,11 +32,12 @@ def line():
            'Waterstof' : "aqua", 'LNG' : "green"}
 
     fig = px.line(df_merk[start:end], y="Kenteken",
-              color="Brandstof omschrijving",
-              color_discrete_map = fuel_color_map)
+                  color="Brandstof omschrijving",
+                  color_discrete_map = fuel_color_map)
 
     fig.update_layout(yaxis_title="Aantal Autos cumulatief", xaxis_title = "Datum",
-              title={'text': 'Cumulatief nieuwe registraties per brandstoftype', 'x': 0.5})
+                      title={'text': 'Cumulatief nieuwe registraties per brandstoftype', 'x': 0.5})
+
     st.plotly_chart(fig, use_container_width=True)
 
 def scatter():
@@ -47,11 +48,10 @@ def scatter():
                      trendline_options=dict(window=30),
                      trendline_color_override="red", labels = {"Brandstof omschrijving": selectedFuel })
 
-    fig.update_layout(
-        title={'text': 'Nieuwe registraties per dag per brandstof: '+ selectedFuel, 'x': 0.5},
-        xaxis_title='Datum',
-        yaxis_title='Aantal nieuwe registraties',
-        coloraxis_colorbar=dict(title="Totaal verbruikte energie <br> in Wh"))
+    fig.update_layout(title={'text': 'Nieuwe registraties per dag per brandstof: '+ selectedFuel, 'x': 0.5},
+                      xaxis_title='Datum',
+                      yaxis_title='Aantal nieuwe registraties',
+                      coloraxis_colorbar=dict(title="Totaal verbruikte energie <br> in Wh"))
 
     st.plotly_chart(fig, use_container_width=True)
 
