@@ -5,7 +5,7 @@ import components.rdw
 
 def main():
     st.title("Electrische energie dashboard")
-    st.image("assets/cool_image.jpeg")
+    st.image("assets/cool_image.png")
     st.markdown("*Welkom bij de dashboard van team 1. Dit dashboard bestaat uit statistieken van elektrische energie verbruik in Nederland. U bevindt zich op de landingspagina waarin alle grafieken worden laten zien. Links staan er een aantal opties waar u van gebruik kunt maken, waaronder navigatie, filteren van de datum en het displayen van de code. Onderaan de sidebar is er ook een link naar een [README.md](https://github.com/ItsMeSafak/electric-energy-dashboard/blob/master/README.md) bestand. Hier staat de technische deel van de documentatie.*")
     st.header("Data gebruik")
     st.subheader("Laadpalen")
