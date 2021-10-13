@@ -14,7 +14,7 @@ for i, file in enumerate(MERK_list):
 
 
 
-fuel_list = ["Electriciteit", "Benzine", "Diesel", "LPG", "CNG", "LNG", "Alcohol","Waterstof"]
+fuel_list = ["Elektriciteit", "Benzine", "Diesel", "LPG", "CNG", "LNG", "Alcohol","Waterstof"]
 fuel_file_list = [(each_string +".csv") for each_string in fuel_list]
 scatter_dict = dict.fromkeys(fuel_list)
 
