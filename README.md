@@ -64,6 +64,10 @@ In case an error pops up, please contact me or check out the following link (if 
 What we first did is analyze the data and check whether everything is correct. We noticed that a few rows had incorrect data input, where the ended date would be earlier than the started date. Also there were some columns that had a longer charge charge time than connected time. These rows were filtered out.
 
 ### RDW Data
+https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773
+https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2
+
+
 The RDW dataset is a set that consists of registrated cars in the Netherlands. The RDW has lots of different datasets regarding the cars in Holland, we picked the one that lists all the registrated cars with their date and another dataset that shows the fuel type of the car. We merged this into one dataframe and deleted more than half of the columns. We also checked on whether there were duplicate entries in the dataset and it turned out to be true. We analysed these records and we concluded that the records are exactly the same. The columnds we mainly focussed on were as follows:
 -  **voertuigsoort**: The type of the vehicle.
 - **merk**: Brand of the vehicle.
@@ -72,6 +76,8 @@ The RDW dataset is a set that consists of registrated cars in the Netherlands. T
 - **brandstof_omschrijving**: Fuel type.
 
 ### OCM Data
+https://openchargemap.org/site/develop/api
+
 Another dataset we made use of is the OCM API. This API reveals lots of data regarding charging points for vehicles all over the globe. In our case we mainly focussed on the Netherlands. In this dataset we focussed on the following columns:
 - **isRecentlyVerified**: Whether the charging point got verified recently.
 - **UsageType.Title**: The name of the charging type.

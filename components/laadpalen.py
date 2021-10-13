@@ -51,7 +51,7 @@ def histogram_chargetime():
     # Exclusief de negatieve waarden en de uitschieter van boven de 50 
     global main_df
     df = main_df.drop(main_df.loc[(main_df["ChargeTime"]<0) | (main_df["ChargeTime"]>50)].index)
-    group_labels = ['df']
+    group_labels = ['Chargetime']
     hist_data= [df["ChargeTime"]]
     fig = ff.create_distplot(hist_data, group_labels)
     fig.add_annotation(x=22, y=0.32,
